@@ -16,8 +16,8 @@ set expandtab
 set smarttab
 " indents
 filetype plugin indent on
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 set ai "Auto indent
 set si "Smart indent
 set nowrap "No Wrap lines
@@ -31,7 +31,6 @@ let g:airline_powerline_fonts=1
 " Highlights "{{{
 " ---------------------------------------------------------------------
 set cursorline
-"set cursorcolumn
 
 " Set cursor line color on visual mode
 highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
@@ -75,6 +74,10 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 
 " use <tab> for trigger completion and navigate to the next complete item
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<TAB>"
+" inoremap <silent><expr> <TAB>
+"         \ pumvisible() ? "\<C-n>":
+"         \ <SID>check_back_space() ? "<TAB>":
+"         \ coc##refresh()
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} "COC
 Plug 'https://github.com/jiangmiao/auto-pairs' "AutoPair
@@ -93,6 +96,7 @@ Plug 'https://github.com/akinsho/bufferline.nvim' "BufferLine
 Plug 'kyazdani42/nvim-web-devicons' "DevIcons
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Treesitter
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' } "Tokoynight theme
 call plug#end()
 
 " Treesitter
@@ -307,12 +311,20 @@ if exists("&termguicolors") && exists("&winblend")
   " let g:neosolarized_termtrans=1
   " runtime ./colors/NeoSolarized.vim
   " colorscheme NeoSolarized
-  let g:catppuccin_flavour = "mocha" " latte, frappe, macchiato, mocha
-
-lua << EOF
-require("catppuccin").setup()
-EOF
-
-colorscheme catppuccin
+" let g:catppuccin_flavour = "mocha" " latte, frappe, macchiato, mocha
+" lua << EOF
+" require("catppuccin").setup({
+" transparent_background = true,
+" term_colors = true,
+" })
+" EOF
+" colorscheme catppuccin
+" lua << EOF 
+" require("tokyonight").setup({
+" transparent = true,
+" terminal_colors = true,
+" })
+" EOF
+colorscheme tokyonight
 endif
 
